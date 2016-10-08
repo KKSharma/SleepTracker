@@ -141,7 +141,7 @@ public class FitbitClient {
         setupRestClient();
     }
 
-    public FitbitApi getMissedConnectionApi() {
+    public FitbitApi getFitBitApi() {
         return mFitbitApi;
     }
 

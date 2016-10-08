@@ -16,7 +16,7 @@ public class Api {
     private static final String TAG = Api.class.getSimpleName();
 
     public static void getSleepForDate(SleepRequestEvent event) {
-        Call<SleepPayload> call = FitbitClient.getInstance().getMissedConnectionApi().getSleepForDate(event.getDate());
+        Call<SleepPayload> call = FitbitClient.getInstance().getFitBitApi().getSleepForDate(event.getDate());
         call.enqueue(new FitbitCallback<SleepPayload>(event));
     }
 
