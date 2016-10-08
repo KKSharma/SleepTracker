@@ -147,10 +147,6 @@ public class FitbitOauth2 extends ActivityFitbit {
     }
 
     private synchronized void setAuthToken(String authToken) {
-        matchClientSetAuthToken(authToken);
-    }
-
-    private void matchClientSetAuthToken(String authToken) {
         try {
             FitbitClient.init(this, BuildConfig.BUILD_TYPE);
             FitbitClient.getInstance().setAuthToken(authToken);

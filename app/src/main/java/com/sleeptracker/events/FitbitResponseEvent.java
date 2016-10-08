@@ -13,7 +13,6 @@ import sleeptracker.com.libfitbit.model.FitbitError;
 import sleeptracker.com.libfitbit.model.response.FitbitResult;
 
 public abstract class FitbitResponseEvent<RESULT extends FitbitResult> {
-    public static final int ERROR_NUMBER_YOUR_PROFILE_IS_HIDDEN_MUST_BE_VISIBLE_FOR_DAILY_MATCHES = 1001;
     public static final int FORCE_UPGRADE_RESPONSE_NUMBER = 99999;
     public static final int PROBLEM_WITH_USER_INPUT = 1000;
     public static final int AUTHENTICATION_KEY_EXPIRED_CODE = 7777;
@@ -165,10 +164,6 @@ public abstract class FitbitResponseEvent<RESULT extends FitbitResult> {
                 && hasServerError();
     }
 
-    public  boolean isProfileHiddenError() {
-        return hasServerError()
-                && getResult().getError().getNumber() == ERROR_NUMBER_YOUR_PROFILE_IS_HIDDEN_MUST_BE_VISIBLE_FOR_DAILY_MATCHES;
-    }
     public  boolean authKeyFailedOrExpired() {
         return (getResult() != null)
                 && (getResult().getError() != null)
@@ -205,7 +200,6 @@ public abstract class FitbitResponseEvent<RESULT extends FitbitResult> {
             if (this.hasServerError()) {
                 Log.d("FitbitResponseEvent", String.format("server error number =%d", getServerErrorNumber()));
                 if(getServerErrorNumber() == PROBLEM_WITH_USER_INPUT
-                        || getServerErrorNumber() == ERROR_NUMBER_YOUR_PROFILE_IS_HIDDEN_MUST_BE_VISIBLE_FOR_DAILY_MATCHES
                         || getServerErrorNumber() == FORCE_UPGRADE_RESPONSE_NUMBER) {
                     Log.d("FitbitResponseEvent", "shouldRetry return false");
                     return false;

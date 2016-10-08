@@ -1,6 +1,3 @@
-/**
- * Copyright crossover.com 2017. All rights reserved.
- */
 package sleeptracker.com.libfitbit.core;
 
 import android.content.Context;
@@ -20,10 +17,6 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import sleeptracker.com.libfitbit.api.FitbitApi;
 
-/**
- * Created by Krishna Sharma on 17/07/16.
- * CrossoverClient is responsible to setup retrofit rest apis.
- */
 public class FitbitClient {
     private static final String TAG = FitbitClient.class.getSimpleName();
     public static final String AUTHORIZATION = "Authorization";
@@ -131,7 +124,7 @@ public class FitbitClient {
                 return chain.proceed(request);
             }
         });
-        baseClientBuilder.addInterceptor(new MatchInterceptor(true));
+        baseClientBuilder.addInterceptor(new FitBitInterceptor(true));
         builder = new Retrofit.Builder()
                 .baseUrl(getBaseUrl())
                 .addConverterFactory(GsonConverterFactory.create())
@@ -156,9 +149,9 @@ public class FitbitClient {
         return PROTOCOL + "api.fitbit.com" + "/";
     }
 
-    class MatchInterceptor implements Interceptor {
+    class FitBitInterceptor implements Interceptor {
         private final boolean mIncludeToken;
-        private MatchInterceptor(boolean includeAuthToken) {
+        private FitBitInterceptor(boolean includeAuthToken) {
             mIncludeToken = includeAuthToken;
         }
 
