@@ -8,6 +8,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.View;
 import android.webkit.WebView;
@@ -18,6 +19,8 @@ import android.widget.Toast;
 import com.sleeptracker.api.Api;
 import com.sleeptracker.appbase.ActivityFitbit;
 import com.sleeptracker.events.SleepRequestEvent;
+import com.sleeptracker.events.SleepResponseEvent;
+import com.sleeptracker.flows.login.ActivityLogin;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -26,6 +29,7 @@ import java.util.Locale;
 
 import butterknife.Bind;
 import sleeptracker.com.libfitbit.core.FitbitClient;
+import sleeptracker.com.libfitbit.model.SleepPayload;
 
 public class FitbitOauth2 extends ActivityFitbit {
     private static final String TAG = FitbitOauth2.class.getSimpleName();
@@ -142,6 +146,7 @@ public class FitbitOauth2 extends ActivityFitbit {
                 Toast.makeText(getApplicationContext(), "Network Error", Toast.LENGTH_SHORT).show();
                 mProgressBar.setVisibility(View.GONE);
             }
+            setResult(ActivityLogin.RESULT_CODE_LOGIN);
             FitbitOauth2.this.finish();
         }
     }
@@ -150,7 +155,6 @@ public class FitbitOauth2 extends ActivityFitbit {
         try {
             FitbitClient.init(this, BuildConfig.BUILD_TYPE);
             FitbitClient.getInstance().setAuthToken(authToken);
-            Api.getSleepForDate(new SleepRequestEvent("2016-09-30"));
         } catch (RuntimeException e) {
             e.printStackTrace();
         }

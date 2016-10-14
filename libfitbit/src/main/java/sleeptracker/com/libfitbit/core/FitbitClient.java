@@ -15,6 +15,7 @@ import okhttp3.Response;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import sleeptracker.com.libfitbit.BuildConfig;
 import sleeptracker.com.libfitbit.api.FitbitApi;
 
 public class FitbitClient {
@@ -80,7 +81,7 @@ public class FitbitClient {
     }
 
     public void setAuthToken(@NonNull String authToken) {
-        Log.d("MatchClient", "setAuthToken=" + authToken);
+        Log.d(TAG, "setAuthToken=" + authToken);
         // never set auth token to empty string
         if (authToken.isEmpty()) {
             return;
@@ -99,19 +100,21 @@ public class FitbitClient {
                 new OkHttpClient().newBuilder()
                         .readTimeout(READ_TIMEOUT, TimeUnit.SECONDS)
                         .connectTimeout(CONNECT_TIMEOUT, TimeUnit.SECONDS);
-        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
-            @Override
-            public void log(String message) {
-                if (message.length() <= MAX_LOG_LENGTH) {
-                    Log.d(TAG, message);
-                } else {
-                    Log.d(TAG, message.substring(0, MAX_LOG_LENGTH));
-                }
+        if (BuildConfig.DEBUG) {
+            HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
+                @Override
+                public void log(String message) {
+                    if (message.length() <= MAX_LOG_LENGTH) {
+                        Log.d(TAG, message);
+                    } else {
+                        Log.d(TAG, message.substring(0, MAX_LOG_LENGTH));
+                    }
 
-            }
-        });
-        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-        baseClientBuilder.addInterceptor(interceptor);
+                }
+            });
+            interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+            baseClientBuilder.addInterceptor(interceptor);
+        }
         baseClientBuilder.addInterceptor(new Interceptor() {
             @Override
             public Response intercept(Interceptor.Chain chain) throws IOException {

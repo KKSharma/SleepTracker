@@ -9,6 +9,7 @@ import de.greenrobot.event.EventBus;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import sleeptracker.com.libfitbit.BuildConfig;
 import sleeptracker.com.libfitbit.core.FitbitClient;
 import sleeptracker.com.libfitbit.model.SleepPayload;
 
@@ -29,7 +30,7 @@ public class Api {
         @Override
         public void onResponse(Call<ResponseType> call, Response<ResponseType> response) {
             Object fitbitResponse = request.createResponse(call, response, request);
-            Log.w(TAG, "fitbitResponse = " + fitbitResponse + " : : " + response.raw().toString());
+            Log.d(TAG, "fitbitResponse = " + fitbitResponse + " : : " + response.raw().toString());
             if (fitbitResponse == null) {
                 Log.w(TAG, " FitbitCallback onResponse: fitbitResponse == null");
             } else {
@@ -39,6 +40,9 @@ public class Api {
 
         @Override
         public void onFailure(Call<ResponseType> call, Throwable t) {
+            if (BuildConfig.DEBUG) {
+                t.printStackTrace();
+            }
             EventBus.getDefault().post(request.createResponse(t, request));
         }
     }

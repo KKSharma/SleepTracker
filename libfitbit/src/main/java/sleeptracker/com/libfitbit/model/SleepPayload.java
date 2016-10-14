@@ -1,7 +1,6 @@
 package sleeptracker.com.libfitbit.model;
 
 
-import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
@@ -13,10 +12,9 @@ import sleeptracker.com.libfitbit.model.response.FitbitResult;
 public class SleepPayload extends FitbitResult {
 
     @SerializedName("sleep")
-    @Expose
     private List<Sleep> sleep = new ArrayList<Sleep>();
+
     @SerializedName("summary")
-    @Expose
     private Summary summary;
 
     /**
@@ -49,55 +47,54 @@ public class SleepPayload extends FitbitResult {
 
     public class Sleep {
         @SerializedName("awakeCount")
-        @Expose
         private Integer awakeCount;
+
         @SerializedName("awakeDuration")
-        @Expose
         private Integer awakeDuration;
+
         @SerializedName("awakeningsCount")
-        @Expose
         private Integer awakeningsCount;
+
         @SerializedName("dateOfSleep")
-        @Expose
         private String dateOfSleep;
+
         @SerializedName("duration")
-        @Expose
-        private Integer duration;
+        private Double duration;
+
         @SerializedName("efficiency")
-        @Expose
         private Integer efficiency;
+
         @SerializedName("isMainSleep")
-        @Expose
         private Boolean isMainSleep;
+
         @SerializedName("logId")
-        @Expose
-        private Integer logId;
+        private Double logId;
+
         @SerializedName("minuteData")
-        @Expose
         private List<MinuteDatum> minuteData = new ArrayList<MinuteDatum>();
+
         @SerializedName("minutesAfterWakeup")
-        @Expose
         private Integer minutesAfterWakeup;
+
         @SerializedName("minutesAsleep")
-        @Expose
         private Integer minutesAsleep;
+
         @SerializedName("minutesAwake")
-        @Expose
         private Integer minutesAwake;
+
         @SerializedName("minutesToFallAsleep")
-        @Expose
         private Integer minutesToFallAsleep;
+
         @SerializedName("restlessCount")
-        @Expose
         private Integer restlessCount;
+
         @SerializedName("restlessDuration")
-        @Expose
         private Integer restlessDuration;
+
         @SerializedName("startTime")
-        @Expose
         private String startTime;
+
         @SerializedName("timeInBed")
-        @Expose
         private Integer timeInBed;
 
         /**
@@ -159,14 +156,14 @@ public class SleepPayload extends FitbitResult {
         /**
          * @return The duration
          */
-        public Integer getDuration() {
+        public Double getDuration() {
             return duration;
         }
 
         /**
          * @param duration The duration
          */
-        public void setDuration(Integer duration) {
+        public void setDuration(Double duration) {
             this.duration = duration;
         }
 
@@ -201,14 +198,14 @@ public class SleepPayload extends FitbitResult {
         /**
          * @return The logId
          */
-        public Integer getLogId() {
+        public Double getLogId() {
             return logId;
         }
 
         /**
          * @param logId The logId
          */
-        public void setLogId(Integer logId) {
+        public void setLogId(Double logId) {
             this.logId = logId;
         }
 
@@ -342,10 +339,10 @@ public class SleepPayload extends FitbitResult {
         public class MinuteDatum {
 
             @SerializedName("dateTime")
-            @Expose
+
             private String dateTime;
             @SerializedName("value")
-            @Expose
+
             private String value;
 
             /**
@@ -383,13 +380,12 @@ public class SleepPayload extends FitbitResult {
     public class Summary {
 
         @SerializedName("totalMinutesAsleep")
-        @Expose
         private Integer totalMinutesAsleep;
+
         @SerializedName("totalSleepRecords")
-        @Expose
         private Integer totalSleepRecords;
+
         @SerializedName("totalTimeInBed")
-        @Expose
         private Integer totalTimeInBed;
 
         /**
