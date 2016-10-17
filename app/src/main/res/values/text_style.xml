@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="font">
+        <item name="android:typeface">sans</item>
+    </style>
+
+    <style name="fontNormal" parent="font">
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="fontBold" parent="font">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="fontItalic" parent="font">
+        <item name="android:textStyle">italic</item>
+    </style>
+
+    <style name="whiteNormalText16" parent="fontNormal">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+
+    <style name="whiteBoldText12" parent="fontBold">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="white40PercentOpacityText16" parent="fontNormal">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:alpha">0.40</item>
+    </style>
+
+    <style name="whiteBoldText16" parent="fontBold">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+</resources>

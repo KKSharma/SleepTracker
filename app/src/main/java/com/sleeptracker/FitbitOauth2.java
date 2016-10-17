@@ -8,18 +8,13 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.sleeptracker.api.Api;
 import com.sleeptracker.appbase.ActivityFitbit;
-import com.sleeptracker.events.SleepRequestEvent;
-import com.sleeptracker.events.SleepResponseEvent;
 import com.sleeptracker.flows.login.ActivityLogin;
 
 import org.json.JSONException;
@@ -29,7 +24,6 @@ import java.util.Locale;
 
 import butterknife.Bind;
 import sleeptracker.com.libfitbit.core.FitbitClient;
-import sleeptracker.com.libfitbit.model.SleepPayload;
 
 public class FitbitOauth2 extends ActivityFitbit {
     private static final String TAG = FitbitOauth2.class.getSimpleName();
@@ -44,13 +38,10 @@ public class FitbitOauth2 extends ActivityFitbit {
     @Bind(R.id.webview)
     WebView mWebView;
 
-    @Bind(R.id.progress_bar)
-    ProgressBar mProgressBar;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        initializeView(R.layout.oauth);
+        initializeView(R.layout.activity_oauth);
         mWebView.getSettings().setJavaScriptEnabled(true);
         String lang = Locale.getDefault().getISO3Language();
         String country = lang;
@@ -153,7 +144,6 @@ public class FitbitOauth2 extends ActivityFitbit {
 
     private synchronized void setAuthToken(String authToken) {
         try {
-            FitbitClient.init(this, BuildConfig.BUILD_TYPE);
             FitbitClient.getInstance().setAuthToken(authToken);
         } catch (RuntimeException e) {
             e.printStackTrace();
